@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B2A699C82438ADA7D2F65424B042F1E1"
+               BlueprintIdentifier = "DB2680EE2B0475496D4EBD6AA0FA4CF7"
                BuildableName = "Pods_EMPlacePicker.framework"
                BlueprintName = "Pods-EMPlacePicker"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B2A699C82438ADA7D2F65424B042F1E1"
+            BlueprintIdentifier = "DB2680EE2B0475496D4EBD6AA0FA4CF7"
             BuildableName = "Pods_EMPlacePicker.framework"
             BlueprintName = "Pods-EMPlacePicker"
             ReferencedContainer = "container:Pods.xcodeproj">

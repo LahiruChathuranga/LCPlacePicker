@@ -9,7 +9,6 @@ import UIKit
 import GoogleMaps
 import GooglePlaces
 import SnapKit
-import RxCocoa
 import FloatingPanel
 
 public protocol PlacePickerVCDelegate {
@@ -54,7 +53,7 @@ open class PlacePickerVC: UIViewController, FloatingPanelControllerDelegate {
     var address: String?
     var delegate: PlacePickerVCDelegate?
     var places: [GMSAddress] = []
-    lazy var userLocation: CLLocation = LocationManager.shared.userLocation.value ?? CLLocation(latitude: 0.0, longitude: 0.0)
+    lazy var userLocation: CLLocation = LocationManager.shared.userLocation ?? CLLocation(latitude: 0.0, longitude: 0.0)
     
     
     open override func viewDidLoad() {
@@ -273,7 +272,7 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
     
     static let shared = LocationManager()
     private var manager: CLLocationManager!
-    var userLocation: BehaviorRelay<CLLocation?> = BehaviorRelay<CLLocation?>(value: nil)
+    var userLocation: CLLocation?
     
     private override init() {
         super.init()
@@ -293,7 +292,7 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
         let _userLocation: CLLocation = locations[0] as CLLocation
         // Call stopUpdatingLocation() to stop listening for location updates,
         // other wise this function will be called every time when user location changes.
-        userLocation.accept(_userLocation)
+        userLocation = (_userLocation)
         manager.stopUpdatingLocation()
     }
     

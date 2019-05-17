@@ -10,5 +10,5 @@ target 'EMPlacePicker' do
   pod 'FloatingPanel'
   pod 'GoogleMaps'
   pod 'GooglePlaces'
-  pod 'RxCocoa',    '~> 4.0'
+  #pod 'RxCocoa',    '~> 4.0'
 end
