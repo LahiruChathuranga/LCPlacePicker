@@ -51,7 +51,8 @@ open class PlacePickerVC: UIViewController, FloatingPanelControllerDelegate {
     var marker: GMSMarker = GMSMarker()
     var location: CLLocationCoordinate2D?
     var address: String?
-    var delegate: PlacePickerVCDelegate?
+    public var delegate: PlacePickerVCDelegate?
+    
     var places: [GMSAddress] = []
     lazy var userLocation: CLLocation = LocationManager.shared.userLocation ?? CLLocation(latitude: 0.0, longitude: 0.0)
     
@@ -127,7 +128,6 @@ open class PlacePickerVC: UIViewController, FloatingPanelControllerDelegate {
         
         //regitering tableview cell
         tableView.register(PickerTVCell.self, forCellReuseIdentifier: "pickerCell")
-        
         
         tableView.tableFooterView = UIView()
         tableView.backgroundColor = UIColor.clear
