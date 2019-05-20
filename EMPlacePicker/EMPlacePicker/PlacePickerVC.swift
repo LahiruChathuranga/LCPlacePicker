@@ -128,9 +128,6 @@ open class PlacePickerVC: UIViewController, FloatingPanelControllerDelegate {
         //regitering tableview cell
         tableView.register(PickerTVCell.self, forCellReuseIdentifier: "pickerCell")
         
-        //customize table view row height
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 150
         
         tableView.tableFooterView = UIView()
         tableView.backgroundColor = UIColor.clear
