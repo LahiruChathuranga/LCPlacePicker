@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <EMPlacePicker/PlacePickerVC-Swift.h>
 
 //! Project version number for EMPlacePicker.
 FOUNDATION_EXPORT double EMPlacePickerVersionNumber;
