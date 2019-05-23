@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1998F8E112544EA82880D3BD /* Pods_EMPlacePicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D62F8AFE7764A385C084B68 /* Pods_EMPlacePicker.framework */; };
 		8402F5692286033600693CB0 /* EMPlacePicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 8402F5672286033600693CB0 /* EMPlacePicker.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84ACC5722294646300494600 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ACC5712294646300494600 /* LocationManager.swift */; };
+		84ACC574229464B600494600 /* PickerTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ACC573229464B600494600 /* PickerTVCell.swift */; };
 		84C32CE2228D4E2000F43583 /* PlacePickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C32CE1228D4E2000F43583 /* PlacePickerVC.swift */; };
 /* End PBXBuildFile section */
 
@@ -18,6 +20,8 @@
 		8402F5642286033600693CB0 /* EMPlacePicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EMPlacePicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8402F5672286033600693CB0 /* EMPlacePicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EMPlacePicker.h; sourceTree = "<group>"; };
 		8402F5682286033600693CB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		84ACC5712294646300494600 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		84ACC573229464B600494600 /* PickerTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerTVCell.swift; sourceTree = "<group>"; };
 		84C32CE1228D4E2000F43583 /* PlacePickerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacePickerVC.swift; sourceTree = "<group>"; };
 		E66EF50E839FD194C963AA49 /* Pods-EMPlacePicker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EMPlacePicker.release.xcconfig"; path = "Target Support Files/Pods-EMPlacePicker/Pods-EMPlacePicker.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -67,6 +71,8 @@
 				84C32CE1228D4E2000F43583 /* PlacePickerVC.swift */,
 				8402F5672286033600693CB0 /* EMPlacePicker.h */,
 				8402F5682286033600693CB0 /* Info.plist */,
+				84ACC5712294646300494600 /* LocationManager.swift */,
+				84ACC573229464B600494600 /* PickerTVCell.swift */,
 			);
 			path = EMPlacePicker;
 			sourceTree = "<group>";
@@ -209,6 +215,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84ACC5722294646300494600 /* LocationManager.swift in Sources */,
+				84ACC574229464B600494600 /* PickerTVCell.swift in Sources */,
 				84C32CE2228D4E2000F43583 /* PlacePickerVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

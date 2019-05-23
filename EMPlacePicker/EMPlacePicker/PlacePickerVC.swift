@@ -11,6 +11,7 @@ import GooglePlaces
 import SnapKit
 import FloatingPanel
 
+@objc
 public protocol PlacePickerVCDelegate {
     func selectedLocation(location: CLLocationCoordinate2D, address: String)
 }
@@ -33,24 +34,23 @@ public class MyFloatingPanelLayout: FloatingPanelLayout {
 
 open class PlacePickerVC: UIViewController, FloatingPanelControllerDelegate {
     
-    
-    let customMap: GMSMapView = {
+    fileprivate let customMap: GMSMapView = {
         let map = GMSMapView()
         return map
     }()
     
-    let tableView: UITableView = {
+    fileprivate let tableView: UITableView = {
         let tv = UITableView()
         return tv
     }()
     
-    let contentVC = UIViewController()
-    var fpc: FloatingPanelController!
-    var searchButton: UIBarButtonItem?
-    var cancelButton: UIBarButtonItem?
-    var marker: GMSMarker = GMSMarker()
-    var location: CLLocationCoordinate2D?
-    var address: String?
+    fileprivate let contentVC = UIViewController()
+    fileprivate var fpc: FloatingPanelController!
+    fileprivate var searchButton: UIBarButtonItem?
+    fileprivate var cancelButton: UIBarButtonItem?
+    fileprivate var marker: GMSMarker = GMSMarker()
+    fileprivate var location: CLLocationCoordinate2D?
+    fileprivate var address: String?
     public var delegate: PlacePickerVCDelegate?
     
     var places: [GMSAddress] = []
@@ -68,23 +68,23 @@ open class PlacePickerVC: UIViewController, FloatingPanelControllerDelegate {
         getPlacesAccordingToUserLocation()
     }
     
-    func getPlacesAccordingToUserLocation() {
+    fileprivate func getPlacesAccordingToUserLocation() {
         getLocationUsingCoordinate(lat: userLocation.coordinate.latitude , lon: userLocation.coordinate.longitude ) {
             self.tableView.reloadData()
         }
     }
-    open override func viewWillAppear(_ animated: Bool) {
+    fileprivate override func viewWillAppear(_ animated: Bool) {
         fpc.addPanel(toParent: self)
     }
     
-    open override func viewWillDisappear(_ animated: Bool) {
+    fileprivate override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         fpc.removePanelFromParent(animated: true)
     }
     
     
-    private func setupUI() {
+    fileprivate func setupUI() {
         searchButton = UIBarButtonItem(image: UIImage(named: "ic_search_search_bar"), style: .done, target: self, action: #selector(self.navToAddressPicker))
         cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(self.dismissView))
         
@@ -98,7 +98,7 @@ open class PlacePickerVC: UIViewController, FloatingPanelControllerDelegate {
         
     }
     
-    private func setupFloatingView() {
+    fileprivate func setupFloatingView() {
         fpc = FloatingPanelController()
         fpc.delegate = self
         
@@ -113,7 +113,7 @@ open class PlacePickerVC: UIViewController, FloatingPanelControllerDelegate {
         fpc.addPanel(toParent: self)
     }
     
-    private func setupMap() {
+    fileprivate func setupMap() {
         
         let camera = GMSCameraPosition.camera(withTarget: CLLocationCoordinate2D(latitude: userLocation.coordinate.latitude , longitude: userLocation.coordinate.longitude ), zoom: 17)
         customMap.camera = camera
@@ -134,18 +134,18 @@ open class PlacePickerVC: UIViewController, FloatingPanelControllerDelegate {
         
     }
     
-    func animateMap(location: CLLocationCoordinate2D) {
+    fileprivate func animateMap(location: CLLocationCoordinate2D) {
         let camera = GMSCameraPosition.camera(withTarget: location, zoom: 17)
         customMap.camera = camera
         customMap.animate(to: camera)
     }
     
-    func addSubViews() {
+    fileprivate func addSubViews() {
         view.addSubview(customMap)
         contentVC.view.addSubview(tableView)
     }
     
-    func setupConnstraints() {
+    fileprivate func setupConnstraints() {
         customMap.snp.makeConstraints { (make) in
             make.left.right.top.bottom.equalTo(self.view)
         }
@@ -155,25 +155,24 @@ open class PlacePickerVC: UIViewController, FloatingPanelControllerDelegate {
         
     }
     
-    @objc func navToAddressPicker() {
+    @objc fileprivate func navToAddressPicker() {
         
         let acController = GMSAutocompleteViewController()
         acController.delegate = self
         present(acController, animated: true)
     }
     
-    @objc func dismissView() {
+    @objc fileprivate func dismissView() {
         self.dismiss(animated: true, completion: nil)
     }
     
     func addMarker(lat: CLLocationDegrees, lon: CLLocationDegrees ) {
         marker.position = CLLocationCoordinate2D(latitude: lat, longitude: lon)
         marker.title = ""
-        marker.icon = UIImage(named: "ic_location_picker")
         marker.map = customMap
     }
     
-    func getLocationUsingCoordinate(lat: CLLocationDegrees, lon: CLLocationDegrees, completion: @escaping ()->()) {
+    fileprivate func getLocationUsingCoordinate(lat: CLLocationDegrees, lon: CLLocationDegrees, completion: @escaping ()->()) {
         let geoCorder = GMSGeocoder()
         geoCorder.reverseGeocodeCoordinate(CLLocationCoordinate2D(latitude: lat, longitude: lon)) { (response, error) in
             if error != nil {
@@ -189,12 +188,12 @@ open class PlacePickerVC: UIViewController, FloatingPanelControllerDelegate {
     }
     
     //layout floating panel
-    public func floatingPanel(_ vc: FloatingPanelController, layoutFor newCollection: UITraitCollection) -> FloatingPanelLayout? {
+    fileprivate func floatingPanel(_ vc: FloatingPanelController, layoutFor newCollection: UITraitCollection) -> FloatingPanelLayout? {
         return MyFloatingPanelLayout()
     }
 }
 extension PlacePickerVC: GMSMapViewDelegate {
-    private func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
+    fileprivate func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
         customMap.clear()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             let lat = coordinate.latitude
@@ -210,7 +209,7 @@ extension PlacePickerVC: GMSMapViewDelegate {
     }
 }
 extension PlacePickerVC: GMSAutocompleteViewControllerDelegate {
-    public func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+    fileprivate func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         if let address = place.formattedAddress {
             self.address = address
         }
@@ -265,94 +264,5 @@ extension PlacePickerVC: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-public class LocationManager: NSObject, CLLocationManagerDelegate {
-    
-    static let shared = LocationManager()
-    private var manager: CLLocationManager!
-    var userLocation: CLLocation?
-    
-    private override init() {
-        super.init()
-        manager = CLLocationManager()
-        manager.delegate = self
-        manager.desiredAccuracy = kCLLocationAccuracyBest
-        manager.requestWhenInUseAuthorization()
-    }
-    
-    func determineCurrentLocation() {
-        if CLLocationManager.locationServicesEnabled() {
-            manager.startUpdatingLocation()
-        }
-    }
-    
-    private func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let _userLocation: CLLocation = locations[0] as CLLocation
-        // Call stopUpdatingLocation() to stop listening for location updates,
-        // other wise this function will be called every time when user location changes.
-        userLocation = (_userLocation)
-        manager.stopUpdatingLocation()
-    }
-    
-    private func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        //
-    }
-}
 
-public class PickerTVCell: UITableViewCell {
-    
-    let placeNameLabel: UILabel = {
-        let placeName = UILabel()
-        placeName.text = "Place name"
-        placeName.numberOfLines = 0
-        placeName.font = UIFont(name: "SF Pro Display", size: 16)
-        placeName.textColor = UIColor.white  //UIColor(red:0.03, green:0.15, blue:0.26, alpha:1)
-        return placeName
-    }()
-    
-    let upperView: UIView = {
-        let view = UIView()
-        return view
-    }()
-    
-    func InitialSetup () {
-        addSubViews()
-        setConstraints()
-        setupUI()
-    }
-    
-    public override func awakeFromNib() {
-        super.awakeFromNib()
-        
-    }
-    
-    func setupUI() {
-        contentView.backgroundColor = UIColor.clear
-        upperView.backgroundColor = UIColor(red:0.03, green:0.15, blue:0.26, alpha:1)
-        upperView.layer.cornerRadius = 4
-    }
-    
-    func addSubViews() {
-        contentView.addSubview(upperView)
-        contentView.addSubview(placeNameLabel)
-        //        contentView.addSubview(coordinateLabel)
-    }
-    
-    func setConstraints() {
-        upperView.snp.makeConstraints { (make) in
-            make.left.equalTo(self.contentView).offset(5)
-            make.right.equalTo(self.contentView).offset(-5)
-            make.top.equalTo(self.contentView).offset(5)
-            make.bottom.equalTo(self.contentView).offset(-5)
-        }
-        placeNameLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(self.upperView).offset(10)
-            make.right.equalTo(self.upperView).offset(-10)
-            make.top.equalTo(self.upperView).offset(10)
-            make.bottom.equalTo(self.upperView).offset(-10)
-            make.centerX.equalTo(self.upperView.snp.centerX)
-            
-        }
-    }
-    
-}
 
