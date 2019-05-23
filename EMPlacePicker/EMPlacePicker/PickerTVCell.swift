@@ -30,7 +30,7 @@ public class PickerTVCell: UITableViewCell {
         setupUI()
     }
     
-    public override func awakeFromNib() {
+     override func awakeFromNib() {
         super.awakeFromNib()
         
     }

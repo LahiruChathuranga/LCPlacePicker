@@ -17,7 +17,7 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
     private var manager: CLLocationManager!
     var userLocation: CLLocation?
     
-    public override init() {
+     override init() {
         super.init()
         manager = CLLocationManager()
         manager.delegate = self

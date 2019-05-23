@@ -73,11 +73,11 @@ open class PlacePickerVC: UIViewController, FloatingPanelControllerDelegate {
             self.tableView.reloadData()
         }
     }
-    public override func viewWillAppear(_ animated: Bool) {
+     override func viewWillAppear(_ animated: Bool) {
         fpc.addPanel(toParent: self)
     }
     
-    public override func viewWillDisappear(_ animated: Bool) {
+     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         fpc.removePanelFromParent(animated: true)
