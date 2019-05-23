@@ -193,7 +193,7 @@ open class PlacePickerVC: UIViewController, FloatingPanelControllerDelegate {
     }
 }
 extension PlacePickerVC: GMSMapViewDelegate {
-    fileprivate func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
+    public func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
         customMap.clear()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             let lat = coordinate.latitude
@@ -209,7 +209,7 @@ extension PlacePickerVC: GMSMapViewDelegate {
     }
 }
 extension PlacePickerVC: GMSAutocompleteViewControllerDelegate {
-    fileprivate func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+    public func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         if let address = place.formattedAddress {
             self.address = address
         }
@@ -252,10 +252,10 @@ extension PlacePickerVC: UITableViewDelegate, UITableViewDataSource {
         }
         return UITableViewCell()
     }
-    private func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
-    private func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.location = CLLocationCoordinate2D(latitude: places[indexPath.row].coordinate.latitude, longitude: places[indexPath.row].coordinate.longitude)
         self.address = places[indexPath.row].lines![0]
         

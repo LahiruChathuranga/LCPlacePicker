@@ -7,6 +7,9 @@
 //
 
 import Foundation
+import GoogleMaps
+import GooglePlaces
+
 
 public class LocationManager: NSObject, CLLocationManagerDelegate {
     
@@ -28,7 +31,7 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
         }
     }
     
-    private func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let _userLocation: CLLocation = locations[0] as CLLocation
         // Call stopUpdatingLocation() to stop listening for location updates,
         // other wise this function will be called every time when user location changes.
