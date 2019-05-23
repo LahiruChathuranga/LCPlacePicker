@@ -84,7 +84,7 @@ open class PlacePickerVC: UIViewController, FloatingPanelControllerDelegate {
     }
     
     
-     func setupUI() {
+     public func setupUI() {
         searchButton = UIBarButtonItem(image: UIImage(named: "ic_search_search_bar"), style: .done, target: self, action: #selector(self.navToAddressPicker))
         cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(self.dismissView))
         
@@ -98,7 +98,7 @@ open class PlacePickerVC: UIViewController, FloatingPanelControllerDelegate {
         
     }
     
-     func setupFloatingView() {
+     public func setupFloatingView() {
         fpc = FloatingPanelController()
         fpc.delegate = self
         
@@ -113,7 +113,7 @@ open class PlacePickerVC: UIViewController, FloatingPanelControllerDelegate {
         fpc.addPanel(toParent: self)
     }
     
-     func setupMap() {
+     public func setupMap() {
         
         let camera = GMSCameraPosition.camera(withTarget: CLLocationCoordinate2D(latitude: userLocation.coordinate.latitude , longitude: userLocation.coordinate.longitude ), zoom: 17)
         customMap.camera = camera
@@ -166,13 +166,13 @@ open class PlacePickerVC: UIViewController, FloatingPanelControllerDelegate {
         self.dismiss(animated: true, completion: nil)
     }
     
-    func addMarker(lat: CLLocationDegrees, lon: CLLocationDegrees ) {
+    public func addMarker(lat: CLLocationDegrees, lon: CLLocationDegrees ) {
         marker.position = CLLocationCoordinate2D(latitude: lat, longitude: lon)
         marker.title = ""
         marker.map = customMap
     }
     
-     func getLocationUsingCoordinate(lat: CLLocationDegrees, lon: CLLocationDegrees, completion: @escaping ()->()) {
+     public func getLocationUsingCoordinate(lat: CLLocationDegrees, lon: CLLocationDegrees, completion: @escaping ()->()) {
         let geoCorder = GMSGeocoder()
         geoCorder.reverseGeocodeCoordinate(CLLocationCoordinate2D(latitude: lat, longitude: lon)) { (response, error) in
             if error != nil {
@@ -188,12 +188,12 @@ open class PlacePickerVC: UIViewController, FloatingPanelControllerDelegate {
     }
     
     //layout floating panel
-     func floatingPanel(_ vc: FloatingPanelController, layoutFor newCollection: UITraitCollection) -> FloatingPanelLayout? {
+     public func floatingPanel(_ vc: FloatingPanelController, layoutFor newCollection: UITraitCollection) -> FloatingPanelLayout? {
         return MyFloatingPanelLayout()
     }
 }
 extension PlacePickerVC: GMSMapViewDelegate {
-     func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
+     public func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
         customMap.clear()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             let lat = coordinate.latitude
@@ -209,7 +209,7 @@ extension PlacePickerVC: GMSMapViewDelegate {
     }
 }
 extension PlacePickerVC: GMSAutocompleteViewControllerDelegate {
-     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+     public func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         if let address = place.formattedAddress {
             self.address = address
         }
@@ -230,21 +230,21 @@ extension PlacePickerVC: GMSAutocompleteViewControllerDelegate {
         self.dismiss(animated: true, completion: nil)
     }
     
-     func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
+     public func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
         print("Error:", error.localizedDescription)
     }
     
-     func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+     public func wasCancelled(_ viewController: GMSAutocompleteViewController) {
         dismiss(animated: true, completion: nil)
     }
 }
 
 extension PlacePickerVC: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return places.count
     }
     
-     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "pickerCell", for: indexPath) as? PickerTVCell {
             cell.InitialSetup()
             cell.placeNameLabel.text = places[indexPath.row].lines![0]
@@ -252,10 +252,10 @@ extension PlacePickerVC: UITableViewDelegate, UITableViewDataSource {
         }
         return UITableViewCell()
     }
-     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
-     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.location = CLLocationCoordinate2D(latitude: places[indexPath.row].coordinate.latitude, longitude: places[indexPath.row].coordinate.longitude)
         self.address = places[indexPath.row].lines![0]
         
@@ -339,7 +339,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         }
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let _userLocation: CLLocation = locations[0] as CLLocation
         // Call stopUpdatingLocation() to stop listening for location updates,
         // other wise this function will be called every time when user location changes.
