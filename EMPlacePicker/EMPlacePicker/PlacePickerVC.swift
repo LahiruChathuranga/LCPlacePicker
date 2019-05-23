@@ -31,7 +31,7 @@ public class MyFloatingPanelLayout: FloatingPanelLayout {
 }
 
 
-open class PlacePickerVC: UIViewController, FloatingPanelControllerDelegate {
+public class PlacePickerVC: UIViewController, FloatingPanelControllerDelegate {
     
     
     let customMap: GMSMapView = {
@@ -44,8 +44,8 @@ open class PlacePickerVC: UIViewController, FloatingPanelControllerDelegate {
         return tv
     }()
     
-    let contentVC = UIViewController()
-    var fpc: FloatingPanelController!
+    public let contentVC = UIViewController()
+    public var fpc: FloatingPanelController!
     var searchButton: UIBarButtonItem?
     var cancelButton: UIBarButtonItem?
     var marker: GMSMarker = GMSMarker()
@@ -57,7 +57,7 @@ open class PlacePickerVC: UIViewController, FloatingPanelControllerDelegate {
     lazy var userLocation: CLLocation = LocationManager.shared.userLocation ?? CLLocation(latitude: 0.0, longitude: 0.0)
     
     
-    open override func viewDidLoad() {
+     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupUI()
@@ -73,18 +73,18 @@ open class PlacePickerVC: UIViewController, FloatingPanelControllerDelegate {
             self.tableView.reloadData()
         }
     }
-    open override func viewWillAppear(_ animated: Bool) {
+     override func viewWillAppear(_ animated: Bool) {
         fpc.addPanel(toParent: self)
     }
     
-    open override func viewWillDisappear(_ animated: Bool) {
+     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         fpc.removePanelFromParent(animated: true)
     }
     
     
-    private func setupUI() {
+    public func setupUI() {
         searchButton = UIBarButtonItem(image: UIImage(named: "ic_search_search_bar"), style: .done, target: self, action: #selector(self.navToAddressPicker))
         cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(self.dismissView))
         
@@ -98,7 +98,7 @@ open class PlacePickerVC: UIViewController, FloatingPanelControllerDelegate {
         
     }
     
-    private func setupFloatingView() {
+    public func setupFloatingView() {
         fpc = FloatingPanelController()
         fpc.delegate = self
         
@@ -113,7 +113,7 @@ open class PlacePickerVC: UIViewController, FloatingPanelControllerDelegate {
         fpc.addPanel(toParent: self)
     }
     
-    private func setupMap() {
+    public func setupMap() {
         
         let camera = GMSCameraPosition.camera(withTarget: CLLocationCoordinate2D(latitude: 7.8731 , longitude: 80.7718 ), zoom: 17)
         customMap.camera = camera
@@ -268,8 +268,8 @@ extension PlacePickerVC: UITableViewDelegate, UITableViewDataSource {
 public class LocationManager: NSObject, CLLocationManagerDelegate {
     
     static let shared = LocationManager()
-    private var manager: CLLocationManager!
-    var userLocation: CLLocation?
+    public var manager: CLLocationManager!
+    public var userLocation: CLLocation?
     
     private override init() {
         super.init()
