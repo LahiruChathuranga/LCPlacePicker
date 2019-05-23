@@ -57,7 +57,7 @@ public class PlacePickerVC: UIViewController, FloatingPanelControllerDelegate {
     lazy var userLocation: CLLocation = LocationManager.shared.userLocation ?? CLLocation(latitude: 0.0, longitude: 0.0)
     
     
-    override public func viewDidLoad() {
+    override  func viewDidLoad() {
         super.viewDidLoad()
         
         setupUI()
@@ -73,11 +73,11 @@ public class PlacePickerVC: UIViewController, FloatingPanelControllerDelegate {
             self.tableView.reloadData()
         }
     }
-    override public func viewWillAppear(_ animated: Bool) {
+    override  func viewWillAppear(_ animated: Bool) {
         fpc.addPanel(toParent: self)
     }
     
-    override public func viewWillDisappear(_ animated: Bool) {
+    override  func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         fpc.removePanelFromParent(animated: true)
