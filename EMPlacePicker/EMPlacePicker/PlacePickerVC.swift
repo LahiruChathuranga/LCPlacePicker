@@ -68,23 +68,23 @@ open class PlacePickerVC: UIViewController, FloatingPanelControllerDelegate {
         getPlacesAccordingToUserLocation()
     }
     
-    fileprivate func getPlacesAccordingToUserLocation() {
+    public func getPlacesAccordingToUserLocation() {
         getLocationUsingCoordinate(lat: userLocation.coordinate.latitude , lon: userLocation.coordinate.longitude ) {
             self.tableView.reloadData()
         }
     }
-    fileprivate override func viewWillAppear(_ animated: Bool) {
+    public override func viewWillAppear(_ animated: Bool) {
         fpc.addPanel(toParent: self)
     }
     
-    fileprivate override func viewWillDisappear(_ animated: Bool) {
+    public override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         fpc.removePanelFromParent(animated: true)
     }
     
     
-    fileprivate func setupUI() {
+    public func setupUI() {
         searchButton = UIBarButtonItem(image: UIImage(named: "ic_search_search_bar"), style: .done, target: self, action: #selector(self.navToAddressPicker))
         cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(self.dismissView))
         
@@ -98,7 +98,7 @@ open class PlacePickerVC: UIViewController, FloatingPanelControllerDelegate {
         
     }
     
-    fileprivate func setupFloatingView() {
+    public func setupFloatingView() {
         fpc = FloatingPanelController()
         fpc.delegate = self
         
@@ -113,7 +113,7 @@ open class PlacePickerVC: UIViewController, FloatingPanelControllerDelegate {
         fpc.addPanel(toParent: self)
     }
     
-    fileprivate func setupMap() {
+    public func setupMap() {
         
         let camera = GMSCameraPosition.camera(withTarget: CLLocationCoordinate2D(latitude: userLocation.coordinate.latitude , longitude: userLocation.coordinate.longitude ), zoom: 17)
         customMap.camera = camera
@@ -134,18 +134,18 @@ open class PlacePickerVC: UIViewController, FloatingPanelControllerDelegate {
         
     }
     
-    fileprivate func animateMap(location: CLLocationCoordinate2D) {
+    public func animateMap(location: CLLocationCoordinate2D) {
         let camera = GMSCameraPosition.camera(withTarget: location, zoom: 17)
         customMap.camera = camera
         customMap.animate(to: camera)
     }
     
-    fileprivate func addSubViews() {
+    public func addSubViews() {
         view.addSubview(customMap)
         contentVC.view.addSubview(tableView)
     }
     
-    fileprivate func setupConnstraints() {
+    public func setupConnstraints() {
         customMap.snp.makeConstraints { (make) in
             make.left.right.top.bottom.equalTo(self.view)
         }
@@ -155,14 +155,14 @@ open class PlacePickerVC: UIViewController, FloatingPanelControllerDelegate {
         
     }
     
-    @objc fileprivate func navToAddressPicker() {
+    @objc public func navToAddressPicker() {
         
         let acController = GMSAutocompleteViewController()
         acController.delegate = self
         present(acController, animated: true)
     }
     
-    @objc fileprivate func dismissView() {
+    @objc public func dismissView() {
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -172,7 +172,7 @@ open class PlacePickerVC: UIViewController, FloatingPanelControllerDelegate {
         marker.map = customMap
     }
     
-    fileprivate func getLocationUsingCoordinate(lat: CLLocationDegrees, lon: CLLocationDegrees, completion: @escaping ()->()) {
+    public func getLocationUsingCoordinate(lat: CLLocationDegrees, lon: CLLocationDegrees, completion: @escaping ()->()) {
         let geoCorder = GMSGeocoder()
         geoCorder.reverseGeocodeCoordinate(CLLocationCoordinate2D(latitude: lat, longitude: lon)) { (response, error) in
             if error != nil {
@@ -188,7 +188,7 @@ open class PlacePickerVC: UIViewController, FloatingPanelControllerDelegate {
     }
     
     //layout floating panel
-    fileprivate func floatingPanel(_ vc: FloatingPanelController, layoutFor newCollection: UITraitCollection) -> FloatingPanelLayout? {
+    public func floatingPanel(_ vc: FloatingPanelController, layoutFor newCollection: UITraitCollection) -> FloatingPanelLayout? {
         return MyFloatingPanelLayout()
     }
 }

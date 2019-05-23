@@ -17,7 +17,7 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
     private var manager: CLLocationManager!
     var userLocation: CLLocation?
     
-    private override init() {
+    public override init() {
         super.init()
         manager = CLLocationManager()
         manager.delegate = self
@@ -25,7 +25,7 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
         manager.requestWhenInUseAuthorization()
     }
     
-    fileprivate func determineCurrentLocation() {
+    public func determineCurrentLocation() {
         if CLLocationManager.locationServicesEnabled() {
             manager.startUpdatingLocation()
         }
@@ -39,7 +39,7 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
         manager.stopUpdatingLocation()
     }
     
-    private func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+    public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         //
     }
 }
