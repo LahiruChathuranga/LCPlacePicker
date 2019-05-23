@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class PickerTVCell: UITableViewCell {
+open class PickerTVCell: UITableViewCell {
     
     let placeNameLabel: UILabel = {
         let placeName = UILabel()
@@ -29,10 +29,8 @@ public class PickerTVCell: UITableViewCell {
         setConstraints()
         setupUI()
     }
-    
-     override func awakeFromNib() {
+    open override func awakeFromNib() {
         super.awakeFromNib()
-        
     }
     
     func setupUI() {

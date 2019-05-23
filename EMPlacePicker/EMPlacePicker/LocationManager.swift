@@ -11,13 +11,13 @@ import GoogleMaps
 import GooglePlaces
 
 
-public class LocationManager: NSObject, CLLocationManagerDelegate {
+open class LocationManager: NSObject, CLLocationManagerDelegate {
     
     static let shared = LocationManager()
     private var manager: CLLocationManager!
     var userLocation: CLLocation?
     
-     override init() {
+     open override init() {
         super.init()
         manager = CLLocationManager()
         manager.delegate = self
